@@ -1,0 +1,29 @@
+apply plugin: "groovy"
+
+version = "1.0"
+description = "Spock Framework - Example Project"
+
+sourceCompatibility = 1.7
+
+repositories {
+  mavenCentral()
+  maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+  compile "org.codehaus.groovy:groovy-all:2.4.15"
+  testCompile "org.spockframework:spock-core:1.2-groovy-2.4"
+
+  testRuntime "net.bytebuddy:byte-buddy:1.8.21"  
+  testRuntime "org.objenesis:objenesis:2.6" 
+
+  testRuntime "com.h2database:h2:1.4.197"
+}
+
+task collectJars(type: Copy) {
+    into "$buildDir/output/lib"
+    from configurations.testRuntime
+}
+
+
+
